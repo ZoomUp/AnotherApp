@@ -15,25 +15,22 @@ namespace AnotherApp.Pages
     public partial class AppSettings : ContentPage
     {
         private static readonly HttpClient client = new HttpClient();
-        private readonly string url1 = "https://reqres.in/api/unknown?page=1";
-        private readonly string url2 = "https://reqres.in/api/unknown?page=2";
+        private readonly string url1 = "https://reqres.in/api/unknown";
+        
 
         AllColorsList allColorsList;
-        Dictionary<string, string> colorDic = new Dictionary<string, string>();
+        Dictionary<string, string> colorDic;
+        List<string> colorNames;
+        List<string> colorValue;
 
         public AppSettings()
         {
             InitializeComponent();
+            colorDic = new Dictionary<string, string>();
+            colorNames = new List<string>();
+            colorValue = new List<string>();
             GetColorsList(url1);
-            GetColorsList(url2);
 
-            //var colorNames = new List<string>();
-            //foreach (KeyValuePair<string, string> keyValue in colorDic)
-            //{
-            //    colorNames.Add(keyValue.Value);
-            //}
-
-            //ColorPicker.ItemsSource = colorNames;
         }
 
         private async void GetColorsList(string url)
@@ -45,6 +42,25 @@ namespace AnotherApp.Pages
             foreach (DatumColor datumColor in allColorsList.Data)
             {
                 colorDic.Add(datumColor.Name, datumColor.Color);
+            }            
+
+            foreach (KeyValuePair<string, string> keyValue in colorDic)
+            {
+                colorNames.Add(keyValue.Key);
+                colorValue.Add(keyValue.Value);
+            }
+
+            ColorPicker.ItemsSource = colorNames;
+        }
+
+        private void ColorPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ColorPicker.SelectedIndex != -1)
+            {
+                Color color = Color.FromHex(colorDic[Convert.ToString(ColorPicker.SelectedItem)]);
+                Brush brush = new SolidColorBrush(color);
+
+                VisualColor.Background = brush;
             }
         }
     }

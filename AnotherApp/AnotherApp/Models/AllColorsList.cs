@@ -13,6 +13,13 @@ namespace AnotherApp.Models
         public string Color { get; set; }
         public string PantoneValue { get; set; }
     }
+
+    public class SupportColor
+    {
+        public string Url { get; set; }
+        public string Text { get; set; }
+    }
+
     public class AllColorsList
     {
         public int Page { get; set; }
@@ -20,8 +27,7 @@ namespace AnotherApp.Models
         public int Total { get; set; }
         public int TotalPages { get; set; }
         public List<DatumColor> Data { get; set; }
-        public Support Support { get; set; }
+        public SupportColor Support { get; set; }
     }
-
     
 }

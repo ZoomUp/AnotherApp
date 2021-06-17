@@ -5,7 +5,13 @@
              Title="AppSettings">
     <ContentPage.Content>
         <StackLayout Orientation="Vertical" Padding="30" Spacing="40">
-            <Picker x:Name="ColorPicker"/>
+            <Label Text="Choose color:"/>
+            <Picker x:Name="ColorPicker" SelectedIndexChanged="ColorPicker_SelectedIndexChanged"/>
+            <Frame x:Name="VisualColor"
+                   BackgroundColor="White"
+                   CornerRadius="25"
+                   HeightRequest="20"
+                   WidthRequest="20"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

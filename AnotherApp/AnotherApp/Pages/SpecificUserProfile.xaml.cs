@@ -25,6 +25,7 @@ namespace AnotherApp.Pages
             NavigationPage.SetHasBackButton(this, false);
             GetUsersLists(url1, email);
             GetUsersLists(url2, email);
+
         }
 
         private async void ChangeUserInfoButton_Clicked(object sender, System.EventArgs e)
