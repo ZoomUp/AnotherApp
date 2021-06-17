@@ -4,7 +4,7 @@
              x:Class="AnotherApp.Pages.AppSettings"
              Title="AppSettings">
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical" Padding="30" Spacing="40">
+        <StackLayout Orientation="Vertical" Background="{DynamicResource Key=backColor}" Padding="30" Spacing="40">
             <Label Text="Choose color:"/>
             <Picker x:Name="ColorPicker" SelectedIndexChanged="ColorPicker_SelectedIndexChanged"/>
             <Frame x:Name="VisualColor"
@@ -12,6 +12,8 @@
                    CornerRadius="25"
                    HeightRequest="20"
                    WidthRequest="20"/>
+
+            <Button x:Name="ChangeAppColor" Text="Change App color" Clicked="ChangeAppColor_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

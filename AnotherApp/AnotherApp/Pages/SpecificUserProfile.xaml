@@ -4,7 +4,7 @@
              x:Class="AnotherApp.Pages.SpecificUserProfile"
              Title="UserProfile">
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical" Padding="30" Spacing="40">
+        <StackLayout Orientation="Vertical" Background="{DynamicResource Key=backColor}" Padding="30" Spacing="40">
             <Image x:Name="UserImage" HeightRequest="200"/>
             <Label x:Name="UserNameLabel" Text="Name: "/>
             <Label x:Name="UserLastNameLabel" Text="LastName: "/>

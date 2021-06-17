@@ -30,7 +30,6 @@ namespace AnotherApp.Pages
             colorNames = new List<string>();
             colorValue = new List<string>();
             GetColorsList(url1);
-
         }
 
         private async void GetColorsList(string url)
@@ -42,7 +41,7 @@ namespace AnotherApp.Pages
             foreach (DatumColor datumColor in allColorsList.Data)
             {
                 colorDic.Add(datumColor.Name, datumColor.Color);
-            }            
+            }
 
             foreach (KeyValuePair<string, string> keyValue in colorDic)
             {
@@ -61,7 +60,14 @@ namespace AnotherApp.Pages
                 Brush brush = new SolidColorBrush(color);
 
                 VisualColor.Background = brush;
+
+                
             }
+        }
+
+        private void ChangeAppColor_Clicked(object sender, EventArgs e)
+        {
+            Resources["backColor"] = VisualColor.Background;
         }
     }
 }

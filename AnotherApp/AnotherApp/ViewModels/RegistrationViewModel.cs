@@ -37,9 +37,10 @@ namespace AnotherApp.ViewModels
         {
             SubmitRegCommand = new Command(OnSubmit);
         }
+        // В методе OnSubmit() можно прописать валидацию на входные данные
         public void OnSubmit()
         {
-            if (regEmail != "sdfsdf@gmail.com" || regPassword != "heelo")
+            if (regEmail == "" || regPassword == "")
             {
                 DisplayInvalidLoginPrompt();
             }
