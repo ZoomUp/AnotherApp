@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AnotherApp.Pages.SpecificUserProfile"
+             Title="UserProfile">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Padding="30" Spacing="40">
+            <Image x:Name="UserImage" HeightRequest="200"/>
+            <Label x:Name="UserNameLabel" Text="Name: "/>
+            <Label x:Name="UserLastNameLabel" Text="LastName: "/>
+            <Label x:Name="UserEmailLabel" Text="Email: "/>
+
+            <Button x:Name="ChangeUserInfoButton" Text="Change user info" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5" Clicked="ChangeUserInfoButton_Clicked"/>
+            <Button x:Name="AppSettingsButton" Text="Settings" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5" Clicked="AppSettingsButton_Clicked"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
