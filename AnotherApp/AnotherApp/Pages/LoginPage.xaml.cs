@@ -45,10 +45,10 @@ namespace AnotherApp.Pages
             FormUrlEncodedContent form = new FormUrlEncodedContent(dict);
 
             HttpResponseMessage response = await client.PostAsync(url, form);
-            
+            string responseCode = Convert.ToString(response.StatusCode);
             string result = await response.Content.ReadAsStringAsync();
 
-            if (result != "{\"error\":\"Missing email or username\"}")
+            if (responseCode == "OK")
             {
                 await Navigation.PushAsync(new SpecificUserProfile(LogEmail.Text));
             }

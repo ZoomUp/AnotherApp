@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+
 using AnotherApp.Models;
+using AnotherApp.ViewModels;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -18,18 +18,19 @@ namespace AnotherApp.Pages
         private readonly string url1 = "https://reqres.in/api/unknown";
         
 
-        AllColorsList allColorsList;
-        Dictionary<string, string> colorDic;
-        List<string> colorNames;
-        List<string> colorValue;
+        AllColorsList allColorsList = new AllColorsList();
+        List<string> colorNames = new List<string>();
+        List<string> colorValue = new List<string>();
+        Dictionary<string, string> keyValuePairs;
+        AppStyles appStyles = AppStyles.GetAppStyles();
 
         public AppSettings()
         {
             InitializeComponent();
-            colorDic = new Dictionary<string, string>();
-            colorNames = new List<string>();
-            colorValue = new List<string>();
+            UpdatePage();
+            keyValuePairs = new Dictionary<string, string>();
             GetColorsList(url1);
+            
         }
 
         private async void GetColorsList(string url)
@@ -40,15 +41,15 @@ namespace AnotherApp.Pages
 
             foreach (DatumColor datumColor in allColorsList.Data)
             {
-                colorDic.Add(datumColor.Name, datumColor.Color);
+                keyValuePairs.Add(datumColor.Name, datumColor.Color);
             }
 
-            foreach (KeyValuePair<string, string> keyValue in colorDic)
+            foreach (KeyValuePair<string, string> keyValue in keyValuePairs)
             {
                 colorNames.Add(keyValue.Key);
                 colorValue.Add(keyValue.Value);
             }
-
+            appStyles.ColorDic = keyValuePairs;
             ColorPicker.ItemsSource = colorNames;
         }
 
@@ -56,18 +57,23 @@ namespace AnotherApp.Pages
         {
             if (ColorPicker.SelectedIndex != -1)
             {
-                Color color = Color.FromHex(colorDic[Convert.ToString(ColorPicker.SelectedItem)]);
-                Brush brush = new SolidColorBrush(color);
-
-                VisualColor.Background = brush;
-
-                
+                appStyles.SelectedBackColor = (string)ColorPicker.SelectedItem;
+                VisualColor.Background = appStyles.setBrush();
             }
         }
 
         private void ChangeAppColor_Clicked(object sender, EventArgs e)
         {
-            Resources["backColor"] = VisualColor.Background;
+            MessagingCenter.Send<AppSettings, string>(this, "Updates", "Styles update");
+            Resources["backColor"] = appStyles.setBrush();
+        }
+
+        private void UpdatePage()
+        {            
+            if (appStyles.selectedBackColor != null)
+            {
+                Resources["backColor"] = appStyles.setBrush();
+            }
         }
     }
 }

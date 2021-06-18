@@ -48,13 +48,17 @@ namespace AnotherApp.Pages
             FormUrlEncodedContent form = new FormUrlEncodedContent(dict);
 
             HttpResponseMessage response = await client.PostAsync(url, form);
-
+            string responseCode = Convert.ToString(response.StatusCode);
             string result = await response.Content.ReadAsStringAsync();
 
-            if (result != "{\"error\":\"Missing password\"}")
+            if (result == "OK")
             {
                 DisplayAlert("Notification", "Registration successful", "ОK");
                 await Navigation.PopAsync();
+            }
+            else
+            {
+                DisplayAlert("Notification", "Registration unsuccessful", "ОK");
             }
         }
     }

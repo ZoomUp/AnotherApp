@@ -1,9 +1,9 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using AnotherApp.Pages;
 using System.Net.Http;
 using AnotherApp.Models;
 using Newtonsoft.Json;
+using AnotherApp.ViewModels;
 
 namespace AnotherApp.Pages
 {
@@ -14,6 +14,9 @@ namespace AnotherApp.Pages
         private readonly string url1 = "https://reqres.in/api/users?page=1";
         private readonly string url2 = "https://reqres.in/api/users?page=2";
         ListUsers listUsers1;
+
+        AppStyles appStyles = AppStyles.GetAppStyles();
+        ProfileData profileData = ProfileData.GetProfileData();
         public SpecificUserProfile()
         {
             InitializeComponent();
@@ -26,11 +29,23 @@ namespace AnotherApp.Pages
             GetUsersLists(url1, email);
             GetUsersLists(url2, email);
 
+            MessagingCenter.Subscribe<ChangeData, string>(this, "Updates", (sender, arg) =>
+            {
+                UpdatePage();
+                DisplayAlert("Notification", arg, "OK");
+            });
+
+            MessagingCenter.Subscribe<AppSettings, string>(this, "Updates", (sender, arg) =>
+            {
+                UpdatePage();
+            });
         }
 
-        private async void ChangeUserInfoButton_Clicked(object sender, System.EventArgs e)
+        
+
+        private void ChangeUserInfoButton_Clicked(object sender, System.EventArgs e)
         {
-            
+            Navigation.PushModalAsync(new ChangeData());
         }
         private void AppSettingsButton_Clicked(object sender, System.EventArgs e)
         {
@@ -47,14 +62,26 @@ namespace AnotherApp.Pages
             {
                 if (datum.Email == email)
                 {
-                    UserNameLabel.Text += datum.First_Name;
-                    UserLastNameLabel.Text += datum.Last_Name;
-                    UserImage.Source = datum.Avatar;
-                    UserEmailLabel.Text += datum.Email;
+                    profileData.UserAvatar = datum.Avatar;
+                    profileData.UserFirstName = datum.First_Name;
+                    profileData.UserLastName = datum.Last_Name;
+                    profileData.UserEmail = datum.Email;
+
+                    UpdatePage();
                 }
             }
         }
 
-        
+        private void UpdatePage()
+        {
+            UserImage.Source = profileData.UserAvatar;
+            UserNameLabel.Text = profileData.UserFirstName;
+            UserLastNameLabel.Text = profileData.UserLastName;
+            UserEmailLabel.Text = profileData.UserEmail;
+            if (appStyles.selectedBackColor != null)
+            {
+                Resources["backColor"] = appStyles.setBrush();
+            }            
+        }
     }
 }
