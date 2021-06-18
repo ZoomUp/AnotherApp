@@ -51,7 +51,7 @@ namespace AnotherApp.Pages
             string responseCode = Convert.ToString(response.StatusCode);
             string result = await response.Content.ReadAsStringAsync();
 
-            if (result == "OK")
+            if (responseCode == "OK")
             {
                 DisplayAlert("Notification", "Registration successful", "ОK");
                 await Navigation.PopAsync();
