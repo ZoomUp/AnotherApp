@@ -6,6 +6,7 @@ using System.Net.Http;
 using AnotherApp.Models;
 using AnotherApp.ViewModels;
 using Newtonsoft.Json;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -66,6 +67,7 @@ namespace AnotherApp.Pages
         {
             MessagingCenter.Send<AppSettings, string>(this, "Updates", "Styles update");
             Resources["backColor"] = appStyles.setBrush();
+            Preferences.Set("backColor", appStyles.ColorDic[appStyles.SelectedBackColor]);
         }
 
         private void UpdatePage()
