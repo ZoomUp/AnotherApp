@@ -46,11 +46,14 @@ namespace AnotherApp.Pages
 
             HttpResponseMessage response = await client.PostAsync(url, form);
             string responseCode = Convert.ToString(response.StatusCode);
-            string result = await response.Content.ReadAsStringAsync();
 
             if (responseCode == "OK")
             {
                 await Navigation.PushAsync(new SpecificUserProfile(LogEmail.Text));
+            }
+            else
+            {
+                DisplayAlert("Notification", "Unsuccessful", "ОK");
             }
         }
     }

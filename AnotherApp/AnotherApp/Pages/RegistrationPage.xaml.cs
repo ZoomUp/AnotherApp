@@ -49,7 +49,6 @@ namespace AnotherApp.Pages
 
             HttpResponseMessage response = await client.PostAsync(url, form);
             string responseCode = Convert.ToString(response.StatusCode);
-            string result = await response.Content.ReadAsStringAsync();
 
             if (responseCode == "OK")
             {
