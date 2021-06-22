@@ -67,7 +67,7 @@ namespace AnotherApp.Pages
         {
             MessagingCenter.Send<AppSettings, string>(this, "Updates", "Styles update");
             Resources["backColor"] = appStyles.setBrush();
-            Preferences.Set("backColor", appStyles.ColorDic[appStyles.SelectedBackColor]);
+            OnDisplayAlertQuestionButtonClicked(sender, e);
         }
 
         private void UpdatePage()
@@ -75,6 +75,15 @@ namespace AnotherApp.Pages
             if (appStyles.selectedBackColor != null)
             {
                 Resources["backColor"] = appStyles.setBrush();
+            }
+        }
+
+        async void OnDisplayAlertQuestionButtonClicked(object sender, EventArgs e)
+        {
+            bool response = await DisplayAlert("Preferences", "Set this color as default?", "Yes", "No");
+            if (response)
+            {
+                Preferences.Set("backColor", appStyles.ColorDic[appStyles.SelectedBackColor]);
             }
         }
     }
