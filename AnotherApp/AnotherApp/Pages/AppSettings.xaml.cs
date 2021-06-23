@@ -72,7 +72,7 @@ namespace AnotherApp.Pages
 
         private void UpdatePage()
         {            
-            if (appStyles.selectedBackColor != null)
+            if (appStyles.SelectedBackColor != null)
             {
                 Resources["backColor"] = appStyles.setBrush();
             }

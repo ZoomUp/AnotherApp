@@ -78,7 +78,7 @@ namespace AnotherApp.Pages
             UserNameLabel.Text = profileData.UserFirstName;
             UserLastNameLabel.Text = profileData.UserLastName;
             UserEmailLabel.Text = profileData.UserEmail;
-            if (appStyles.selectedBackColor != null)
+            if (appStyles.SelectedBackColor != null)
             {
                 Resources["backColor"] = appStyles.setBrush();
             }            

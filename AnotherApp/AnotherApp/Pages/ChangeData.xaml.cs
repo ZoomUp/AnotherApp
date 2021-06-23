@@ -38,7 +38,7 @@ namespace AnotherApp.Pages
             EmailChange.Text = profileData.UserEmail;
             UserImage.Source = profileData.UserAvatar;
 
-            if (appStyles.selectedBackColor != null)
+            if (appStyles.SelectedBackColor != null)
             {
                 Resources["backColor"] = appStyles.setBrush();
             }

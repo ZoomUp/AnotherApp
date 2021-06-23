@@ -4,10 +4,10 @@ namespace AnotherApp.ViewModels
 {
     public class ProfileData : INotifyPropertyChanged
     {
-        public string userFirstName;
-        public string userLastName;
-        public string userEmail;
-        public string userAvatar;
+        private string userFirstName;
+        private string userLastName;
+        private string userEmail;
+        private string userAvatar;
 
         private static ProfileData profileData;
 

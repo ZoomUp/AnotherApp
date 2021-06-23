@@ -6,8 +6,8 @@ namespace AnotherApp.ViewModels
 {
     public class AppStyles
     {
-        public Dictionary<string, string> colorDic;
-        public string selectedBackColor;
+        private Dictionary<string, string> colorDic;
+        private string selectedBackColor;
         private static AppStyles appStyles;
         private AppStyles()
         {
